@@ -1,8 +1,8 @@
 package handler
 
 import (
+	"html/template"
 	"net/http"
-	"text/template"
 )
 
 func SignUp(w http.ResponseWriter, r *http.Request) {

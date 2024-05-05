@@ -1,17 +1,17 @@
 package handler
 
 import (
+	"html/template"
 	"net/http"
-	"text/template"
 )
 
 func Home(w http.ResponseWriter, r *http.Request) {
-	t := template.Must(template.ParseFiles(
+	tmpl := template.Must(template.ParseFiles(
 		"web/templates/base.html",
 		"web/templates/home.html",
 	))
 	
-	if err := t.Execute(w, nil); err != nil {
+	if err := tmpl.Execute(w, nil); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
