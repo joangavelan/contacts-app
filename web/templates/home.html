@@ -3,15 +3,15 @@
 <div class="flex h-screen flex-col justify-between">
   {{ template "header" .}}
 
-  <div class="grid place-items-center [&>div]:mb-14">
-    <div class="flex w-[45rem] flex-col gap-8 text-center">
-      <h1 class="text-4xl font-bold">Todo App</h1>
+  <main class="grid place-items-center [&>div]:mb-14">
+    <div class="flex w-[50rem] flex-col gap-8 text-center">
+      <h1 class="text-4xl font-bold">Contacts App</h1>
       <p class="-mt-2.5 leading-8 opacity-90">
-        This is an hypermedia-driven todo application built using Golang, HTMX, and SQLite. It
-        provides users with a simple yet efficient interface to manage their tasks. The application
-        is developed primarily for learning purposes in backend development. It utilizes JWT
-        authentication for personal access and performs CRUD operations to interact with the SQLite
-        database.
+        This is a hypermedia-driven contacts application inspired by the sample application from the
+        <a href="https://hypermedia.systems/" target="_blank" class="link">Hypermedia Systems</a>
+        book. Built using Golang, HTMX, and SQLite, it provides users with a simple yet efficient
+        interface to manage their contacts. The application is developed primarily for learning
+        purposes in backend development, with a focus on building hypermedia-driven applications.
       </p>
 
       <div class="flex justify-center gap-8">
@@ -34,7 +34,7 @@
           Get Started
         </a>
 
-        <a href="https://github.com/joangavelan/todo-app" target="_blank" class="btn">
+        <a href="https://github.com/joangavelan/contacts-app" target="_blank" class="btn">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -56,7 +56,7 @@
         </a>
       </div>
     </div>
-  </div>
+  </main>
 
   {{ template "footer" . }}
 </div>

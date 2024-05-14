@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/joangavelan/todo-app/handler"
+	"github.com/joangavelan/contacts-app/handler"
 )
 
 func main() {
