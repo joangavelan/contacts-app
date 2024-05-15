@@ -1,5 +1,9 @@
 {{ define "content" }}
-<div class="grid h-screen place-items-center [&>div]:mb-12">
-  {{ template "auth-page-content" . }}
+<div class="flex h-screen flex-col justify-between">
+  {{ template "header" . }}
+
+  <main class="grid place-items-center [&>div]:mb-12">{{ template "auth-page-content" . }}</main>
+
+  {{ template "footer" . }}
 </div>
 {{ end }}

@@ -2,7 +2,7 @@
 <div class="flex flex-col gap-5">
   <h1 class="text-center text-3xl font-semibold">Sign Up</h1>
 
-  <form class="grid w-80 gap-2.5">
+  <form class="grid w-80 gap-2.5" hx-post="/auth/signup">
     <label for="username">Username</label>
     <input name="username" type="text" class="input input-bordered w-full" required />
 
@@ -14,7 +14,5 @@
 
     <button class="btn btn-primary mt-1" type="submit">Register</button>
   </form>
-
-  <a href="/auth/sign-in" class="link">Login</a>
 </div>
 {{ end }} {{ define "page-title" }} Sign Up {{ end }}
