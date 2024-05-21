@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/joangavelan/contacts-app/database"
-	"github.com/joangavelan/contacts-app/handlers"
+	pages "github.com/joangavelan/contacts-app/handlers/pages"
 )
 
 func main() {
@@ -24,9 +24,9 @@ func main() {
 	mux.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	// Routes
-	mux.HandleFunc("/{$}", handlers.Home)
-	mux.HandleFunc("GET /auth/sign-in", handlers.SignIn)
-	mux.HandleFunc("GET /auth/sign-up", handlers.SignUp)
+	mux.HandleFunc("/{$}", pages.Home)
+	mux.HandleFunc("GET /auth/sign-in", pages.SignIn)
+	mux.HandleFunc("GET /auth/sign-up", pages.SignUp)
 
 	// Initialize server
 	log.Fatal(http.ListenAndServe(":3000", mux))

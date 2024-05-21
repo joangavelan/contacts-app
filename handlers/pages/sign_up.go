@@ -5,12 +5,13 @@ import (
 	"net/http"
 )
 
-func Home(w http.ResponseWriter, r *http.Request) {
+func SignUp(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles(
-		"web/templates/base.html",
-		"web/templates/home.html",
+		"web/templates/layouts/base.html",
+		"web/templates/layouts/auth.html",
 		"web/templates/commons/header.html",
 		"web/templates/commons/footer.html",
+		"web/templates/pages/sign_up.html",
 	))
 	
 	if err := tmpl.Execute(w, nil); err != nil {
