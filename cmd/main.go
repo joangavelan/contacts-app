@@ -4,12 +4,20 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/joangavelan/contacts-app/database"
 	"github.com/joangavelan/contacts-app/handler"
 )
 
 func main() {
 	// Create a new mux
 	mux := http.NewServeMux()
+
+	// Setup database
+	db, err := database.SetupDB("contacts.db")
+	if err != nil {
+		log.Fatalf("Error setting up database: %v", err)
+	}
+	defer db.Close()
 
 	// Serve static files
 	fs := http.FileServer(http.Dir("web/static"))
