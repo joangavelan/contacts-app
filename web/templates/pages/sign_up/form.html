@@ -1,0 +1,47 @@
+{{ block "sign-up-form" . }}
+<form
+  hx-post="/api/register"
+  hx-swap="outerHTML"
+  hx-indicator="#suf-indicator"
+  hx-disabled-elt='button[type="submit"]'
+  class="grid w-96 gap-2.5"
+>
+  <div class="form-field">
+    <label for="username">Username</label>
+    <input
+      name="username"
+      type="text"
+      class="input input-bordered w-full"
+      value="{{ .Values.Username }}"
+    />
+    {{ if .Errors.Username }}<span>{{ .Errors.Username }}</span>{{ end }}
+  </div>
+
+  <div class="form-field">
+    <label for="email">Email</label>
+    <input
+      name="email"
+      type="email"
+      class="input input-bordered w-full"
+      value="{{ .Values.Email }}"
+    />
+    {{ if .Errors.Email }}<span>{{ .Errors.Email }}</span>{{ end }}
+  </div>
+
+  <div class="form-field">
+    <label for="password">Password</label>
+    <input
+      name="password"
+      type="password"
+      class="input input-bordered w-full"
+      value="{{ .Values.Password }}"
+    />
+    {{ if .Errors.Password }}<span>{{ .Errors.Password }}</span>{{ end }}
+  </div>
+
+  <button class="btn btn-primary mt-1" type="submit">
+    Register
+    <span id="suf-indicator" class="htmx-indicator loading loading-spinner"></span>
+  </button>
+</form>
+{{ end }}

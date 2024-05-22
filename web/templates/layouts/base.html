@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ block "page-title" . }} Contacts App {{ end }}</title>
     <link rel="stylesheet" href="/static/css/styles.css" />
+    <script src="/static/js/htmx.min.js"></script>
   </head>
   <body>
     {{ template "content" . }}
+
+    <script src="/static/js/script.js"></script>
   </body>
 </html>

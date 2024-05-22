@@ -11,7 +11,8 @@ func SignUp(w http.ResponseWriter, r *http.Request) {
 		"web/templates/layouts/auth.html",
 		"web/templates/commons/header.html",
 		"web/templates/commons/footer.html",
-		"web/templates/pages/sign_up.html",
+		"web/templates/pages/sign_up/sign_up.html",
+		"web/templates/pages/sign_up/form.html",
 	))
 	
 	if err := tmpl.Execute(w, nil); err != nil {
