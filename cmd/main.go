@@ -4,19 +4,19 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/joangavelan/contacts-app/database"
 	api "github.com/joangavelan/contacts-app/handlers/api"
 	pages "github.com/joangavelan/contacts-app/handlers/pages"
+	"github.com/joangavelan/contacts-app/internal/database"
 )
 
 func main() {
 	// Create a new mux
 	mux := http.NewServeMux()
 
-	// Setup database
-	db, err := database.SetupDB("contacts.db")
+	// Initialize database connection
+	db, err := database.InitDB("contacts.db")
 	if err != nil {
-		log.Fatalf("Error setting up database: %v", err)
+    log.Fatalf("Failed to initialize database: %v", err)
 	}
 	defer db.Close()
 

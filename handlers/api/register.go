@@ -3,21 +3,16 @@ package handlers
 import (
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
 	"regexp"
 	"strings"
+
+	"github.com/joangavelan/contacts-app/internal/database"
+	"github.com/joangavelan/contacts-app/internal/models"
+
+	"golang.org/x/crypto/bcrypt"
 )
-
-type SignUpFormFields struct { 
-	Username string
-	Email string
-	Password string
-}
-
-type SignUpForm struct {
-	Values SignUpFormFields
-	Errors SignUpFormFields
-}
 
 // Constants for validation
 const (
@@ -35,6 +30,11 @@ func isValidEmail(email string) bool {
 	return emailRegex.MatchString(email)
 }
 
+func hashPassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	return string(bytes), err
+}
+
 func RegisterUser(w http.ResponseWriter, r *http.Request) {
 	// Parse the form data
 	if err := r.ParseForm(); err != nil {
@@ -42,7 +42,7 @@ func RegisterUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	signUpForm := SignUpForm{}
+	signUpForm := models.SignUpForm{}
 
 	// Retrieve and trim form values
 	signUpForm.Values.Username = strings.TrimSpace(r.FormValue("username"))
@@ -72,6 +72,38 @@ func RegisterUser(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Unable to render template", http.StatusInternalServerError)
 		}
 		return
+	}
+
+	// Store user information securely in the database
+	// 1. Verify if the email already exists
+	exists, err := database.EmailExists(signUpForm.Values.Email)
+	if err != nil {
+    log.Printf("Error checking email existence: %v", err)
+		http.Error(w, "Error checking email existence", http.StatusInternalServerError)
+		return
+	}
+
+	if exists {
+		// Respond with a 409 Conflict status if the email is already registered
+		http.Error(w, "Email address already registered", http.StatusConflict)
+		return
+	}
+	
+	// 2. Hash the password for safe storage
+	hashedPassword, err := hashPassword(signUpForm.Values.Password)
+	if err != nil {
+		log.Printf("Error hashing password: %v", err)
+		http.Error(w, "Error hashing password", http.StatusInternalServerError)
+		return
+	}
+	
+	// 3. Insert user data into the database
+	_, err = database.DB.Exec(database.InsertUser, signUpForm.Values.Username, signUpForm.Values.Email, hashedPassword)
+	if err != nil {
+		// Log the specific error for debugging purposes
+    log.Printf("Error inserting user data into database: %v", err)
+		http.Error(w, "Error storing user data", http.StatusInternalServerError)
+    return
 	}
 
 	// Respond with a success message (replace this with a redirect)
