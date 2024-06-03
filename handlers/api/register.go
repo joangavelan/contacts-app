@@ -13,6 +13,7 @@ import (
 	"github.com/joangavelan/contacts-app/internal/auth"
 	"github.com/joangavelan/contacts-app/internal/database"
 	"github.com/joangavelan/contacts-app/internal/models"
+	"github.com/joangavelan/contacts-app/pkg/toast"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -90,6 +91,9 @@ func RegisterUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if exists {
+		if err := toast.Error("Email address already registered").WriteToHeader(w); err != nil {
+			log.Printf("Error writing toast event: %v", err)
+		}
 		http.Error(w, "Email address already registered", http.StatusConflict)
 		return
 	}

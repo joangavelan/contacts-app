@@ -4,7 +4,7 @@
 
 @layer utilities {
   .form-field {
-    @apply flex flex-col gap-2.5 [&>label]:font-medium [&>span]:text-sm [&>span]:text-warning;
+    @apply flex flex-col gap-2.5 [&>label]:font-medium [&>span]:text-sm [&>span]:text-error;
   }
 }
 
@@ -21,4 +21,36 @@
 
 .htmx-request.loading-spinner {
   display: block;
+}
+
+#toast-container {
+  @apply fixed bottom-12 right-12 flex flex-col gap-2.5;
+}
+
+.toast {
+  @apply relative -right-96 rounded-md px-6 py-3.5 font-semibold transition-all duration-500;
+}
+
+.toast-info {
+  @apply bg-info;
+}
+
+.toast-success {
+  @apply bg-success;
+}
+
+.toast-error {
+  @apply bg-error;
+}
+
+.toast-warning {
+  @apply bg-warning;
+}
+
+.toast.slide-in {
+  @apply right-0;
+}
+
+.toast.fade-out {
+  @apply opacity-0;
 }
