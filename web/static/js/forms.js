@@ -6,7 +6,7 @@ document.addEventListener('htmx:beforeRequest', function (e) {
 
 document.addEventListener('htmx:afterRequest', function (e) {
   const t = getSubmitButtonText(e)
-  t.style.display = 'block'
+  if (t) t.style.display = 'block'
 })
 
 function getSubmitButtonText(e) {

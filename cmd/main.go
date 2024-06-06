@@ -16,7 +16,7 @@ func main() {
 	// Initialize database connection
 	db, err := database.InitDB("contacts.db")
 	if err != nil {
-    log.Fatalf("Failed to initialize database: %v", err)
+		log.Fatalf("Failed to initialize database: %v", err)
 	}
 	defer db.Close()
 
@@ -27,10 +27,11 @@ func main() {
 	// Routes
 	// group - pages
 	mux.HandleFunc("/{$}", pages.Home)
-	mux.HandleFunc("GET /auth/sign-in", pages.SignIn)
-	mux.HandleFunc("GET /auth/sign-up", pages.SignUp)
+	mux.HandleFunc("GET /auth/login", pages.Login)
+	mux.HandleFunc("GET /auth/register", pages.Register)
 	// group - api routes
-	mux.HandleFunc("POST /api/register", api.RegisterUser)
+	mux.HandleFunc("POST /api/register", api.Register)
+	mux.HandleFunc("POST /api/login", api.Login)
 
 	// Initialize server
 	log.Fatal(http.ListenAndServe(":3000", mux))

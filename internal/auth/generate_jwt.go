@@ -38,7 +38,7 @@ func createHMAC(message, secret string) string {
 	return base64Encode(h.Sum(nil))
 }
 
-func GenerateJWT(userId int64, email, username string) (string, error) {
+func GenerateJWT(userId int64, username, email string) (string, error) {
 	header := Header{
 		Alg: "HS256",
 		Typ: "JWT",
