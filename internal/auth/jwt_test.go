@@ -70,3 +70,48 @@ func TestGenerateJWT(t *testing.T) {
 		t.Fatalf("unexpected signature: %s, expected: %s", parts[2], expectedSignature)
 	}
 }
+
+func TestValidateJWT(t *testing.T) {
+	// Setup
+	jwtSecretKey = "testsecretkey"
+
+	// Generate a valid token
+	userID := int64(1)
+	username := "testuser"
+	email := "testuser@example.com"
+	token, err := GenerateJWT(userID, username, email)
+	if err != nil {
+		t.Fatalf("failed to generate token: %v", err)
+	}
+
+	// Test valid token
+	claims, err := ValidateJWT(token)
+	if err != nil {
+		t.Errorf("expected valid token, got error: %v", err)
+	}
+	if claims.Sub != userID || claims.Username != username || claims.Email != email {
+		t.Errorf("claims do not match expected values: got %+v", claims)
+	}
+
+	// Test invalid token signature
+	invalidSignatureToken := token[:len(token)-1] + "X"
+	_, err = ValidateJWT(invalidSignatureToken)
+	if err == nil || err.Error() != "invalid token signature" {
+		t.Errorf("expected invalid token signature error, got: %v", err)
+	}
+
+	// Test expired token
+	expiredClaims := Claims{
+		Sub:      userID,
+		Iat:      time.Now().Add(-2 * time.Hour).Unix(),
+		Exp:      time.Now().Add(-1 * time.Hour).Unix(),
+		Email:    email,
+		Username: username,
+	}
+	expiredClaimsJSON, _ := json.Marshal(expiredClaims)
+	expiredToken := strings.Split(token, ".")[0] + "." + base64Encode(expiredClaimsJSON) + "." + createHMAC(strings.Split(token, ".")[0]+"."+base64Encode(expiredClaimsJSON), jwtSecretKey)
+	_, err = ValidateJWT(expiredToken)
+	if err == nil || err.Error() != "token has expired" {
+		t.Errorf("expected token has expired error, got: %v", err)
+	}
+}

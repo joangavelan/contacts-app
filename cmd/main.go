@@ -6,6 +6,7 @@ import (
 
 	api "github.com/joangavelan/contacts-app/handlers/api"
 	pages "github.com/joangavelan/contacts-app/handlers/pages"
+	"github.com/joangavelan/contacts-app/internal/auth"
 	"github.com/joangavelan/contacts-app/internal/database"
 )
 
@@ -29,6 +30,7 @@ func main() {
 	mux.HandleFunc("/{$}", pages.Home)
 	mux.HandleFunc("GET /auth/login", pages.Login)
 	mux.HandleFunc("GET /auth/register", pages.Register)
+	mux.HandleFunc("GET /contacts", auth.Middleware(http.HandlerFunc(pages.Contacts)))
 	// group - api routes
 	mux.HandleFunc("POST /api/register", api.Register)
 	mux.HandleFunc("POST /api/login", api.Login)

@@ -6,3 +6,8 @@ type User struct {
 	Email    string
 	Password string
 }
+
+type UserContext struct {
+	Id       int64
+	Username string
+}

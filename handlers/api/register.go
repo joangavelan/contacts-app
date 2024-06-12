@@ -98,6 +98,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		Secure:   true,
 	})
 
-	// Respond with success message.
-	fmt.Fprintf(w, `<div>Registration successful! Redirecting...</div>`)
+	// Redirect to contacts page.
+	w.Header().Set("HX-Redirect", "/contacts")
+	w.WriteHeader(302)
 }

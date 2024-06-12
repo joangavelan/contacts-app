@@ -88,6 +88,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		Secure:   true,
 	})
 
-	// Successful login response.
-	fmt.Fprintf(w, `<div>Successful login! Redirecting...</div>`)
+	// Redirect to contacts page.
+	w.Header().Set("HX-Redirect", "/contacts")
+	w.WriteHeader(302)
 }
