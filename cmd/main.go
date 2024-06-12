@@ -27,7 +27,7 @@ func main() {
 
 	// Routes
 	// group - pages
-	mux.HandleFunc("/{$}", pages.Home)
+	mux.HandleFunc("GET /{$}", pages.Home)
 	mux.HandleFunc("GET /auth/login", pages.Login)
 	mux.HandleFunc("GET /auth/register", pages.Register)
 	mux.HandleFunc("GET /contacts", auth.Middleware(http.HandlerFunc(pages.Contacts)))
