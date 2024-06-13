@@ -1,3 +1,13 @@
 {{ define "content" }}
 <h1 class="m-2 text-3xl">Welcome {{ .Username }}!</h1>
+
+<button
+  hx-post="/api/logout"
+  hx-indicator="#logout-spinner"
+  hx-disabled-elt="this"
+  class="btn btn-primary"
+>
+  <p>Logout</p>
+  <span id="logout-spinner" class="htmx-indicator loading loading-spinner"></span>
+</button>
 {{ end }}

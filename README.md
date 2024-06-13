@@ -14,7 +14,7 @@ This is a hypermedia-driven contacts application inspired by the sample applicat
 ## Roadmap
 
 - [x] Design and implement the database schema for storing contacts in SQLite.
-- [ ] Implement JWT authentication middleware for user authentication.
+- [x] Implement JWT authentication.
 - [ ] Set up basic CRUD API endpoints for managing contacts.
 - [ ] Create intuitive user interfaces for adding, updating, and viewing contacts.
 - [ ] Implement search, filtering, and ordering functionalities for efficient contact management.

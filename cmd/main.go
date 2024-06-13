@@ -34,6 +34,7 @@ func main() {
 	// group - api routes
 	mux.HandleFunc("POST /api/register", api.Register)
 	mux.HandleFunc("POST /api/login", api.Login)
+	mux.HandleFunc("POST /api/logout", api.Logout)
 
 	// Initialize server
 	log.Fatal(http.ListenAndServe(":3000", mux))
