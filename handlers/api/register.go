@@ -94,11 +94,11 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		Path:     "/",
 		Expires:  time.Now().Add(config.CookieExpiration),
 		HttpOnly: true,
-		SameSite: http.SameSiteStrictMode,
 		Secure:   true,
+		SameSite: http.SameSiteLaxMode,
 	})
 
 	// Redirect to contacts page.
 	w.Header().Set("HX-Redirect", "/contacts")
-	w.WriteHeader(302)
+	w.WriteHeader(http.StatusSeeOther)
 }
