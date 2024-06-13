@@ -7,18 +7,17 @@ This is a hypermedia-driven contacts application inspired by the sample applicat
 
 - **JWT Authentication:** Secure user authentication using JSON Web Tokens (JWT) ensures that only authorized users can access the application's functionalities.
 - **CRUD Operations:** Users can create, read, update, and delete contacts, allowing them full control over their contact lists.
-- **SQLite Database:** The application utilizes SQLite as the database management system to store and manage contacts.
-- **Search, Filtering, and Ordering:** Users can search for contacts, apply filters, and order contacts based on various criteria for better organization.
-- **Download Contacts:** Users can download their contact lists for backup or sharing purposes.
+- **Search, Filtering, Pagination, and Ordering**: Users can search for contacts, apply filters, paginate through contact lists, and order contacts based on various criteria for better organization.
+- **Upload/Download Contacts:** Users can upload and download their contact lists using CSV or Excel files.
 
 ## Roadmap
 
 - [x] Design and implement the database schema for storing contacts in SQLite.
 - [x] Implement JWT authentication.
-- [ ] Set up basic CRUD API endpoints for managing contacts.
-- [ ] Create intuitive user interfaces for adding, updating, and viewing contacts.
-- [ ] Implement search, filtering, and ordering functionalities for efficient contact management.
-- [ ] Add support for downloading contacts for backup and portability.
+- [ ] Create user interfaces for adding, updating, and viewing contacts.
+- [ ] Set up API endpoints for managing contacts.
+- [ ] Implement search, filtering, pagination, and ordering functionalities for efficient contact management.
+- [ ] Add support for bulk uploading and downloading of contacts using CSV or Excel files .
 
 ## Technologies Used
 
@@ -42,7 +41,7 @@ This is a hypermedia-driven contacts application inspired by the sample applicat
 3. **Install npm dependencies:**
 
    ```
-   npm install
+   cd web && npm install
    ```
 
 4. **Run the server:**
@@ -59,13 +58,6 @@ This is a hypermedia-driven contacts application inspired by the sample applicat
 
 5. **Access the Application:**
    Open your web browser and navigate to `http://localhost:3000` to access the application.
-
-## Usage
-
-- **Authentication:** Users need to sign in using their credentials to access the contacts application. Upon successful authentication, a JWT token is generated and used for subsequent requests.
-- **CRUD Operations:** Users can perform CRUD operations on their contacts, including adding, updating, deleting, and archiving contacts.
-- **Search, Filtering, and Ordering:** Users can search for contacts, apply filters, and order contacts based on various criteria for efficient contact management.
-- **Database Interaction:** All user contacts are stored and managed using the SQLite database, ensuring data integrity and persistence.
 
 ## Contributing
 
