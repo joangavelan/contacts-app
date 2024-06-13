@@ -28,8 +28,8 @@ func main() {
 	// Routes
 	// group - pages
 	mux.HandleFunc("GET /{$}", pages.Home)
-	mux.HandleFunc("GET /auth/login", pages.Login)
-	mux.HandleFunc("GET /auth/register", pages.Register)
+	mux.HandleFunc("GET /auth/login", auth.AuthPagesMiddleware(http.HandlerFunc(pages.Login)))
+	mux.HandleFunc("GET /auth/register", auth.AuthPagesMiddleware(http.HandlerFunc(pages.Register)))
 	mux.HandleFunc("GET /contacts", auth.Middleware(http.HandlerFunc(pages.Contacts)))
 	// group - api routes
 	mux.HandleFunc("POST /api/register", api.Register)
